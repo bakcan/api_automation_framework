@@ -1,0 +1,1 @@
+{"92ab8ee1cd4af65e9ee156b5dcdd7385":{"statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1},"items":[{"uid":"110989201c2c9121","reportUrl":"https://bakcan.github.io/api_automation_assignment/4/#testresult/110989201c2c9121","status":"passed","time":{"start":1760796119016,"stop":1760796122841,"duration":3825}}]}}
