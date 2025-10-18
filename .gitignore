@@ -1,2 +1,5 @@
 target/
 .allure/
+allure-results/
+allure-history/
+gh-pages/

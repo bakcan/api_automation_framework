@@ -1,0 +1,15 @@
+# Maven
+target/
+.allure/
+allure-results/
+allure-report/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.DS_Store
+
+# Git
+.git/
+.gitignore
