@@ -1,1 +1,1 @@
-{"total":1,"items":[{"uid":"89f11aaf186c8aa0f61cf1d32f58461e","name":"Books API","statistic":{"failed":6,"broken":0,"skipped":0,"passed":5,"unknown":0,"total":11}}]}
+{"total":2,"items":[{"uid":"405a46b5d3c73400707edb43e071d409","name":"Books API - Negative Tests","statistic":{"failed":13,"broken":0,"skipped":0,"passed":11,"unknown":0,"total":24}},{"uid":"85e83fe38447fc16e0aa9a4cceff2a5b","name":"Books API - Positive Tests","statistic":{"failed":3,"broken":0,"skipped":0,"passed":5,"unknown":0,"total":8}}]}
