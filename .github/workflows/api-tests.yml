@@ -37,6 +37,16 @@ jobs:
           ref: gh-pages
           path: gh-pages
       
+      - name: Copy previous allure-history to results
+        if: always()
+        continue-on-error: true
+        run: |
+          if [ -d "gh-pages/history" ]; then
+            echo "Copying history from gh-pages/history to target/allure-results/history"
+            mkdir -p target/allure-results/history
+            cp -r gh-pages/history/* target/allure-results/history/ 2>/dev/null || true
+          fi
+      
       - name: Generate Allure Report
         uses: simple-elf/allure-report-action@master
         if: always()
