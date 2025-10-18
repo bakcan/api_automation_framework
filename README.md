@@ -33,5 +33,7 @@ docker run --rm \
 GitHub Actions workflow automatically:
 1. Builds Docker image
 2. Runs tests in Docker container
-3. Generates Allure test report and deploys in Github actions
+3. Generates and deploys Allure report to GitHub Pages
+
+View the latest test report at: https://bakcan.github.io/api_automation_assignment/
 
