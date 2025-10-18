@@ -8,14 +8,17 @@ REST API automation framework for testing the FakeRestAPI Bookstore using Rest A
 # Clean and run all tests
 mvn clean test
 
-# Run tests and view Allure report
+# Run all tests and view Allure report
 mvn clean test; mvn allure:serve
+
+# Run a group of tests and view Allure report
+mvn clean test -Dgroups="smoke"; mvn allure:serve
 ```
 
-## Running Tests in Docker
+## Running Tests in Dockerß
 
 ```bash
-# Build Docker image
+# Build Docker imageß
 docker build -t bookstore-api-tests .
 
 # Run with default configuration (from config.properties)

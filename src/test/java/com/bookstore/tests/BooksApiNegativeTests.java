@@ -417,9 +417,31 @@ public class BooksApiNegativeTests extends BaseTest {
     }
 
     @Test(priority = 23,
-        description = "23 - PUT book with malformed JSON - verify 400 is returned",
+        description = "23 - PUT book with invalid date format - verify 400 is returned",
         groups = {"negative", "put"})
-    public void test_23_UpdateBookWithMalformedJson_ShouldReturn400() {
+    public void test_23_UpdateBookWithInvalidDateFormat_ShouldReturn400() {
+        String bookWithInvalidDate = "{"
+            + "\"id\": 100,"
+            + "\"title\": \"Test Book\","
+            + "\"description\": \"Testing invalid date\","
+            + "\"pageCount\": 100,"
+            + "\"excerpt\": \"Test excerpt\","
+            + "\"publishDate\": \"invalid-date-format\""
+            + "}";
+
+        given()
+            .spec(requestSpec)
+            .body(bookWithInvalidDate)
+        .when()
+            .put("/Books/100")
+        .then()
+            .statusCode(anyOf(equalTo(400), equalTo(422)));
+    }
+
+    @Test(priority = 24,
+        description = "24 - PUT book with malformed JSON - verify 400 is returned",
+        groups = {"negative", "put"})
+    public void test_24_UpdateBookWithMalformedJson_ShouldReturn400() {
         String malformedJson = "{"
             + "\"id\": 100,"
             + "\"title\": \"Updated Book\""  // Missing comma
@@ -438,10 +460,10 @@ public class BooksApiNegativeTests extends BaseTest {
             .statusCode(anyOf(equalTo(400), equalTo(422), equalTo(500)));
     }
 
-    @Test(priority = 24,
-        description = "24 - PUT book with ID mismatch between URL and body - verify 400 is returned",
+    @Test(priority = 25,
+        description = "25 - PUT book with ID mismatch between URL and body - verify 400 is returned",
         groups = {"negative", "put"})
-    public void test_24_UpdateBookWithIdMismatch_ShouldReturn400() {
+    public void test_25_UpdateBookWithIdMismatch_ShouldReturn400() {
         Book bookWithDifferentId = Book.builder()
             .id(999)  // Body has ID 999
             .title("Mismatched ID Book")
