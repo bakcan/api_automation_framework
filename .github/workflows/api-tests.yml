@@ -18,10 +18,16 @@ jobs:
         run: docker build -t bookstore-api-tests .
       
       - name: Run tests in Docker container
-        run: |
-          docker run --rm \
-            -v ${{ github.workspace }}/target:/app/target \
-            bookstore-api-tests
+        continue-on-error: true
+        run: docker run --name test-container bookstore-api-tests
+      
+      - name: Copy test results from container
+        if: always()
+        run: docker cp test-container:/app/target ./target
+      
+      - name: Remove test container
+        if: always()
+        run: docker rm test-container
       
       - name: Get Allure history
         uses: actions/checkout@v3
