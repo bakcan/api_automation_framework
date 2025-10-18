@@ -13,5 +13,7 @@ RUN mvn dependency:go-offline -B
 # Copy the entire project
 COPY . .
 
-CMD ["mvn", "clean", "test"]
+RUN mvn test-compile
+
+CMD ["mvn", "test"]
 

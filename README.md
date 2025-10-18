@@ -62,8 +62,11 @@ mvn clean test -Dgroups="smoke"; mvn allure:serve
 # Build Docker image
 docker build -t bookstore-api-tests .
 
-# Run with default configuration (from config.properties)
+# Run all tests with default configuration (from config.properties)
 docker run --rm bookstore-api-tests
+
+# Run all positive tests (8 tests)
+docker run --rm bookstore-api-tests mvn test -Dtest=BooksApiPositiveTests
 ```
 
 ## CI/CD Pipeline
