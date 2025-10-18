@@ -1,1 +1,1 @@
-{"total":1,"items":[{"uid":"940a09faf31371a51747026c9d178f0a","name":"Surefire suite","statistic":{"failed":13,"broken":0,"skipped":0,"passed":12,"unknown":0,"total":25}}]}
+{"total":1,"items":[{"uid":"f3d227e7ca7977e6eedd18c20213de61","name":"Bookstore API Test Suite","statistic":{"failed":16,"broken":0,"skipped":0,"passed":17,"unknown":0,"total":33}}]}
