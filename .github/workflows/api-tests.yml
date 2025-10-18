@@ -5,6 +5,23 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  # Manual trigger with dropdown to select test group
+  workflow_dispatch:
+    inputs:
+      test_group:
+        description: 'Test group to run'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - positive
+          - negative
+          - smoke
+          - post
+          - put
+          - get
+          - delete
 
 jobs:
   test:
@@ -14,12 +31,41 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       
+      - name: Determine test command
+        id: test_cmd
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            TEST_GROUP="${{ github.event.inputs.test_group }}"
+          else
+            TEST_GROUP="all"
+          fi
+          
+          echo "Selected test group: $TEST_GROUP"
+          
+          if [ "$TEST_GROUP" = "all" ]; then
+            echo "cmd=mvn clean test" >> $GITHUB_OUTPUT
+          elif [ "$TEST_GROUP" = "positive" ]; then
+            echo "cmd=mvn test -Dtest=BooksApiPositiveTests" >> $GITHUB_OUTPUT
+          elif [ "$TEST_GROUP" = "negative" ]; then
+            echo "cmd=mvn test -Dtest=BooksApiNegativeTests" >> $GITHUB_OUTPUT
+          elif [ "$TEST_GROUP" = "smoke" ]; then
+            echo "cmd=mvn clean test -Dgroups=smoke" >> $GITHUB_OUTPUT
+          elif [ "$TEST_GROUP" = "post" ]; then
+            echo "cmd=mvn clean test -Dgroups=post" >> $GITHUB_OUTPUT
+          elif [ "$TEST_GROUP" = "put" ]; then
+            echo "cmd=mvn clean test -Dgroups=put" >> $GITHUB_OUTPUT
+          elif [ "$TEST_GROUP" = "get" ]; then
+            echo "cmd=mvn clean test -Dgroups=get,get_id" >> $GITHUB_OUTPUT
+          elif [ "$TEST_GROUP" = "delete" ]; then
+            echo "cmd=mvn clean test -Dgroups=delete" >> $GITHUB_OUTPUT
+          fi
+      
       - name: Build Docker image
         run: docker build -t bookstore-api-tests .
       
-      - name: Run tests in Docker container
+      - name: Run tests - ${{ steps.test_cmd.outputs.description }}
         continue-on-error: true
-        run: docker run --name test-container bookstore-api-tests
+        run: docker run --name test-container bookstore-api-tests ${{ steps.test_cmd.outputs.cmd }}
       
       - name: Copy test results from container
         if: always()

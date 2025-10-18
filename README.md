@@ -2,6 +2,38 @@
 
 REST API automation framework for testing the FakeRestAPI Bookstore using Rest Assured, TestNG, and Allure.
 
+## Prerequisites
+
+### Required
+- **Java 11+**
+  ```bash
+  # Check version
+  java -version
+  ```
+
+- **Maven 3.8+**
+  ```bash
+  # Check version
+  mvn -version
+  ```
+
+### Optional
+- **Docker** (for local containerized test execution)
+  ```bash
+  # Check version
+  docker --version
+  ```
+
+
+## Project Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/bakcan/api_automation_assignment.git
+cd api_automation_assignment
+```
+
+
 ## Running Tests Locally
 
 ```bash
@@ -15,20 +47,23 @@ mvn clean test; mvn allure:serve
 mvn clean test -Dgroups="smoke"; mvn allure:serve
 ```
 
-## Running Tests in Dockerß
+**Available groups:** `smoke`, `positive`, `negative`, `get`, `get_id`, `post`, `put`, `delete`
+
+**Examples:**
+- Smoke tests: `mvn clean test -Dgroups="smoke" && mvn allure:serve`
+- POST tests: `mvn clean test -Dgroups="post" && mvn allure:serve`
+- Positive tests: `mvn test -Dtest=BooksApiPositiveTests && mvn allure:serve`
+
+---
+
+## Running Tests in Docker
 
 ```bash
-# Build Docker imageß
+# Build Docker image
 docker build -t bookstore-api-tests .
 
 # Run with default configuration (from config.properties)
 docker run --rm bookstore-api-tests
-
-# Run with custom environment variables
-docker run --rm \
-  -e BASE_URL=https://custom-api.example.com \
-  -e BASE_PATH=/api/v1 \
-  bookstore-api-tests
 ```
 
 ## CI/CD Pipeline
