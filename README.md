@@ -71,10 +71,23 @@ docker run --rm bookstore-api-tests mvn test -Dtest=BooksApiPositiveTests
 
 ## CI/CD Pipeline
 
-GitHub Actions workflow automatically:
-1. Builds Docker image
-2. Runs tests in Docker container
-3. Generates and deploys Allure report to GitHub Pages
+### Automatic Execution
+GitHub Actions automatically runs **all tests** on:
+- Push to `main` branch
+- Pull requests to `main` branch
 
-View the latest test report at: https://bakcan.github.io/api_automation_assignment/
+### Manual Execution with Test Group Selection
+Run specific test groups without pushing code:
+
+1. Go to: **Actions** → **Bookstore API Automation Tests**
+2. Click **Run workflow** button (top right)
+3. Select test group from dropdown:
+   - `all` - All 33 tests (default)
+   - `positive` - 8 positive tests
+   - `negative` - 25 negative tests
+   - `smoke` - 2 smoke tests
+4. Click **Run workflow**
+
+### View Test Reports
+Latest Allure report: https://bakcan.github.io/api_automation_assignment/
 
