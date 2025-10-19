@@ -89,5 +89,5 @@ Run specific test groups without pushing code:
 4. Click **Run workflow**
 
 ### View Test Reports
-Latest Allure report: https://bakcan.github.io/api_automation_assignment/
+Latest Allure report: https://bakcan.github.io/api_automation_framework/
 
